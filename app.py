@@ -143,7 +143,7 @@ def recommend():
         outfit_embedding_list.append(data_df_ouput.loc[data_df_ouput['img_path'] == "img/"+img_path, 'embeddings'].values[0])
     outfit_embedding_list = np.array(outfit_embedding_list)
     outfit_centroid_embedding = centroid_embedding(outfit_embedding_list)
-    similar_images_df = get_similar_images_annoy_centroid(annoy_tree, outfit_centroid_embedding, 10)
+    similar_images_df = get_similar_images_annoy_centroid(annoy_tree, outfit_centroid_embedding, 20)
 
 
     similar_images=[]
@@ -227,22 +227,22 @@ def show():
     return "200"
 @app.route('/extract')
 def extract():
-    if os.path.exists("img"):
-        shutil.rmtree('img', ignore_errors=True)
+    # if os.path.exists("img"):
+    #     shutil.rmtree('img', ignore_errors=True)
 
-    os.mkdir("img")
+    # os.mkdir("img")
     
-    imgs = []
-    response_API = requests.get("https://oswrs-api-app.herokuapp.com/api/recommendation/send_all")
-    data_img = response_API.text
-    imgs = json.loads(data_img)
-    print(imgs)
+    # imgs = []
+    # response_API = requests.get("https://oswrs-api-app.herokuapp.com/api/recommendation/send_all")
+    # data_img = response_API.text
+    # imgs = json.loads(data_img)
+    # print(imgs)
     
-    for url in imgs:
-        img_data = requests.get(url).content
-        filename = url.split('/')[-1]
-        with open("img" + "/" +filename, 'wb') as handler:
-            handler.write(img_data)
+    # for url in imgs:
+    #     img_data = requests.get(url).content
+    #     filename = url.split('/')[-1]
+    #     with open("img" + "/" +filename, 'wb') as handler:
+    #         handler.write(img_data)
 #FFFF
     if os.path.exists("stored_object2-50.pickle"):
         os.remove("stored_object2-50.pickle")
