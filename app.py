@@ -76,7 +76,7 @@ def recommend():
         unpickler = MyCustomUnpickler(f)
         saved_features = unpickler.load()
 
-    print('load pickle successfully')
+    print('load pickle successfully1')
     #file_to_read.close()
 
     # prepare the data for generating recommendations (exlcude test data)
@@ -87,7 +87,7 @@ def recommend():
     data_df_ouput = pd.DataFrame({'img_path': img_path})
     #data_df_ouput = pd.DataFrame({'img_path': img_path})
     data_df_ouput['embeddings'] = np.array(saved_features.features).tolist()
-    print(data_df_ouput)
+    print(data_df_ouput['embeddings'][1])
 
     def get_similar_images_annoy(annoy_tree, img_index, number_of_items=12):
         start = time.time()
